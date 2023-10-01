@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNAAB IOT POULTRY</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <div class="system">
+        <div class="sys-account">
+            <div>{{FeedingData.NextFeedingDateTime}}</div>
+            <div>FUNAAB POULTRY</div>
+            <img src="{% static 'images/FUNAAB-Logo.png' %}" alt="">
+        </div>
+        <div class="system-container">
+            <div class="headings">
+                <header>IOT BASED POULTRY MANAGEMENT SYSTEM</header>
+                <div>
+                    <div class="header-text">System List <br><span>Manage all the farm system at one place</span></div>
+                    <div class="egg-count">
+                        <div class="value">
+                            <div class="count-text">Average Egg Size (g)</div>
+                            <div>{{EggData.LastEggQuantity}}</div>
+                        </div>
+                        <div class="date">
+                            <div>Today</div>
+                            <div>This week</div>
+                            <div>This month</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="the-systems">
+                <div class="feeding sec">
+                    <div class="thehead">
+                        <div class="sys-head">Feeding System</div>
+                        {% if FeedingData.FeedingSystemFault != 0 %}
+                        <div class="start">Error</div>
+                        {% else %}
+                        <div class="start">Okay</div>
+                        {% endif %}
+                        <img src="{% static 'images/setting.svg'%}" alt="settings">
+                    </div>
+                    <div class="image">
+                        <img class="chick-img" src="{% static 'images/chicken.png' %}" alt="chickens">
+                    </div>
+                    <div class="the-info">
+                        <div class="the-amount">
+                            <div class="amount">
+                                <div class="level">Amount of Feed</div>
+                                <span class="percent">{{FeedingData.CurrentFeedingDuration}}</span>
+                            </div>
+                            <div class="amount">
+                                <div class="level">Water Level</div>
+                                <span class="percent">75%</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div>
+                                <div>Feed Distribution Status</div> <span>Completed</span>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>Next feeding time</div><span>{{FeedingData.LastFeedingDateTime}}</span>
+                            </div>
+                            <hr>
+                            <div class="sys-info">
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="egg sec">
+                    <div class="thehead">
+                        <div class="sys-head">Egg Collection</div>
+                        <div class="start">start</div>
+                        <img src="{% static 'images/setting.svg' %}" alt="settings">
+                    </div>
+                    <div class="image">
+                        <img class="chick-img" src="{% static 'images/egg.png' %}" alt="chickens">
+                    </div>
+                    <div class="the-info">
+                        <div class="info">
+                            <div>
+                                <div>Number of Eggs</div> <span>40</span>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>Egg Collection Status</div><span>Ongoing</span>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>Next Egg Collection time</div><span>9am to 10am</span>
+                            </div>
+                            <hr>
+                            <div class="sys-info">
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="waste sec">
+                    <div class="thehead">
+                        <div class="sys-head">Waste Removal</div>
+                        <div class="start">start</div>
+                        <img src="{% static 'images/setting.svg' %}" alt="settings">
+                    </div>
+                    <div class="image">
+                        <img class="chick-img" src="{% static 'images/waste.png' %}" alt="chickens">
+                    </div>
+                    <div class="the-info">
+                        <div class="the-amount">
+                            <div class="amount">
+                                <div class="feed-amount waste-level">Waste Level</div>
+                                <span class="percent">75%</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div>
+                                <div>Waste Removal Status</div> <span>Completed</span>
+                            </div>
+                            <hr>
+                            <div>
+                                <div>Next Waste Removal</div><span>9am to 10am</span>
+                            </div>
+                            <hr>
+                            <div class="sys-info">
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="water_reservior sec">
+                    <div class="thehead">
+                        <div class="sys-head">Water Reservoir</div>
+                        <div class="start">start</div>
+                        <img src="{% static 'images/setting.svg' %}" alt="settings">
+                    </div>
+                    <div class="image">
+                        <img class="chick-img" src="{% static 'images/water.png' %}" alt="chickens">
+                    </div>
+                    <div class="the-info">
+                        <div class="the-amount">
+                            <div class="amount">
+                                <div class="level">Water Level</div>
+                                <span class="percent">75%</span>
+                            </div>
+                        </div>
+                        <div class="info">
+                            <div>
+                                <div>Pumping water</div> <span>Completed</span>
+                            </div>
+                            <hr>
+                            <div class="sys-info">
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}" alt=""></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+ <!-- <link rel="icon" type="image/png" href="{% static 'static/images/' %}"> -->
