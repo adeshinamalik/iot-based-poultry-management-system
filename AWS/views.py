@@ -40,7 +40,7 @@ def index(request):
 
     #
     # Note when you fetch Date Data from firebase, you need to convert the time from string to Datetime
-    averageEggSize = round(((EggDataFirebase["EggWeight"])/(EggDataFirebase["EggQuantity"])), 2)
+
     EggDataFirebase["StartEggDateTime"] = datetime.strptime(str(EggDataFirebase["StartEggDateTime"]), dateFormat)
     EggDataFirebase["StopEggDateTime"] = datetime.strptime(str(EggDataFirebase["StopEggDateTime"]), dateFormat)
     EggDataFirebase["NextEggDateTime"] = datetime.strptime(str(EggDataFirebase["NextEggDateTime"]), dateFormat)
@@ -111,38 +111,36 @@ def index(request):
                                                WasteStatus=WasteDataFirebase["WasteStatus"],
                                                WasteSystemFault=WasteDataFirebase["WasteSystemFault"])
         newWasteDataDBSqlite.save()
-
+    '''
     if request.method == 'POST':
         startFeeding = request.POST.get('startFeeding', '0')
         stopFeeding = request.POST.get('stopFeeding', '0')
-        startEgg = request.POST.get('startEgg', '0')
-        stopEgg = request.POST.get('stopEgg', '0')
-        startWaste = request.POST.get('startWaste', '0')
+	startEgg = request.POST.get('startEgg', '0')
+	stopEgg = request.POST.get('stopEgg', '0')
+	startWaste = request.POST.get('startWaste', '0')
         stopWaste = request.POST.get('stopWaste', '0')
-        print(f'start feeding is: {startFeeding}')
-        print(startEgg)
-        print(startWaste)
         if startFeeding == '1':
             FeedingStartButton = 1
         else:
             FeedingStartButton = 0
-        if startEgg == '1':
-            EggStartButton = 1
-        else:
-            EggStartButton = 0
+	if startEgg == '1':
+	    EggStartButton = 1
+	else:
+	    EggStartButton = 0
         if startWaste == '1':
             WasteStartButton = 1
         else:
             WasteStartButton = 0
-        update_feeding_data = {"FeedingStartButton": FeedingStartButton}
-        update_egg_data = {"EggStartButton": EggStartButton}
-        update_waste_data = {"WasteStartButton": WasteStartButton}
-        poultryDB.child('Poultry/Feeding').update(update_feeding_data)
+	update_feeding_data = {"FeedingStartButton": FeedingStartButton}
+	update_egg_data = {"EggStartButton": EggStartButton}
+	update_waste_data = {"WasteStartButton": WasteStartButton}
+	poultryDB.child('Poultry/Feeding').update(update_feeding_data)
         poultryDB.child('Poultry/Egg').update(update_egg_data)
         poultryDB.child('Poultry/Waste').update(update_waste_data)
-
+	#print(startFeeding)
+        #print(stopFeeding)
         return redirect('/home')
-
-    return render(request, "index.html", context={'currentTime':datetime.now(),'eggSize':averageEggSize, 'EggData': EggDataFirebase,
+      '''
+    return render(request, "index.html", context={'currentTime':datetime.now(), 'EggData': EggDataFirebase,
                                                   'FeedingData': FeedingDataFirebase,'WasteData': WasteDataFirebase,
                                                   'WaterData': WaterDataFirebase})

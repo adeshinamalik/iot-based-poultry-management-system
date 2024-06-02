@@ -14,7 +14,7 @@
         <div class="sys-account">
             <div>{{currentTime}}</div>
             <div>FUNAAB POULTRY</div>
-            <img src="{% static 'images/FUNAAB-Logo.png' %}" alt="" style="width:200px;">
+            <img src="{% static 'images/FUNAAB-Logo.png' %}" alt="">
         </div>
         <div class="system-container">
             <div class="headings">
@@ -24,7 +24,7 @@
                     <div class="egg-count">
                         <div class="value">
                             <div class="count-text">Average Egg Size (g)</div>
-                            <div>{{eggSize}}</div>
+                            <div>{{EggData.EggQuantity}}</div>
                         </div>
                         <div class="date">
                             <div>Today</div>
@@ -34,19 +34,14 @@
                     </div>
                 </div>
             </div>
-
-            <form class="the-systems" method="POST" enctype="multipart/form-data" action="/home">
-                {% csrf_token %}
-                <!--<div class="the-systems">-->
+            <div class="the-systems">
                 <div class="feeding sec">
                     <div class="thehead">
                         <div class="sys-head">Feeding System</div>
                         {% if FeedingData.FeedingSystemFault != 0 %}
                         <div class="start">Error</div>
                         {% else %}
-                        <button id="startFeeding" name="startFeeding" class="start" value="false">start</button>
-                        <button id="stopFeeding" name="stopFeeding" class="stop" value="true">stop</button>
-                        <!--<div class="start">Okay</div>-->
+                        <div class="start">Okay</div>
                         {% endif %}
                         <img src="{% static 'images/setting.svg'%}" alt="settings">
                     </div>
@@ -66,11 +61,11 @@
                         </div>
                         <div class="info">
                             <div>
-                                {% if FeedingData.FeedingStatus == 1 or FeedingData.FeedingStartButton == 1 %}
-                                <div>Feed Distribution Status</div> <span class="valueEl">Ongoing</span>
+                                {% if FeedingData.FeedingStatus == 1 %}
+                                    <div>Feed Distribution Status</div> <span class="valueEl">Ongoing</span>
                                 {% else %}
-                                <div>Feed Distribution Status</div> <span class="valueEl">Completed</span>
-                                {% endif %}
+                                    <div>Feed Distribution Status</div> <span class="valueEl">Completed</span>
+                                 {% endif %}
                             </div>
                             <hr>
                             <div>
@@ -82,13 +77,11 @@
                             </div>
                             <hr>
                             <div>
-                                <div>Next feeding time</div><span
-                                    class="valueEl">{{FeedingData.NextFeedingDateTime}}</span>
+                                <div>Next feeding time</div><span class="valueEl">{{FeedingData.NextFeedingDateTime}}</span>
                             </div>
                             <hr>
                             <div class="sys-info">
-                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}"
-                                        alt=""></span>
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}" alt=""></span>
                             </div>
                         </div>
                     </div>
@@ -96,12 +89,7 @@
                 <div class="egg sec">
                     <div class="thehead">
                         <div class="sys-head">Egg Collection</div>
-                        {% if EggData.EggSystemFault != 0 %}
-                        <div class="start">Error</div>
-                        {% else %}
-                        <button id="startEgg" name="startEgg" class="start" value=0>start</button>
-                        <button id="stopEgg" name="stopEgg" class="stop" value=0>stop</button>
-                        {% endif %}
+                        <div class="start">start</div>
                         <img src="{% static 'images/setting.svg' %}" alt="settings">
                     </div>
                     <div class="image">
@@ -110,16 +98,16 @@
                     <div class="the-info">
                         <div class="info">
                             <div>
-                                {% if EggData.EggStatus == 1 or EggData.EggStartButton == 1 %}
-                                <div>Egg Collection Status</div> <span class="valueEl">Ongoing</span>
+                                 {% if EggData.EggStatus == 1 %}
+                                    <div>Egg Collection Status</div> <span class="valueEl">Ongoing</span>
                                 {% else %}
-                                <div>Egg Collection Status</div> <span class="valueEl">Completed</span>
-                                {% endif %}
+                                    <div>Egg Collection Status</div> <span class="valueEl">Completed</span>
+                                 {% endif %}
                                 <!--<div>Egg Collection Status</div><span class="valueEl">{{EggData.EggStatus}}</span>-->
                             </div>
                             <hr>
                             <div>
-                                <div>Number of Eggs</div> <span class="valueEl">3</span>
+                                <div>Number of Eggs</div> <span class="valueEl">{{EggData.EggQuantity}}</span>
                             </div>
                             <hr>
                             <div>
@@ -135,8 +123,7 @@
                             </div>
                             <hr>
                             <div class="sys-info">
-                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}"
-                                        alt=""></span>
+                                 <div>System Information</div><span><img src="{% static 'images/arrow-right.svg'%}" alt=""></span>
                             </div>
                         </div>
                     </div>
@@ -144,13 +131,8 @@
                 <div class="waste sec">
                     <div class="thehead">
                         <div class="sys-head">Waste Removal</div>
-                        {% if WasteData.WasteSystemFault != 0 %}
-                        <div class="start">Error</div>
-                        {% else %}
-                        <button id="startWaste" name="startWaste" class="start">start</button>
-                        <button id="stopWaste" name="stopWaste" class="stop">stop</button>
-                        {% endif %}
-                        <img src="{% static 'images/setting.svg' %}" alt="settings">
+                        <div class="start">start</div>
+                       <img src="{% static 'images/setting.svg' %}" alt="settings">
                     </div>
                     <div class="image">
                         <img class="chick-img" src="{% static 'images/waste.png' %}" alt="waste">
@@ -165,11 +147,11 @@
                         <div class="info">
                             <div>
                                 <!--<div>Waste Removal Status</div> <span class="valueEl">{{WasteData.WasteStatus}}</span>-->
-                                {% if WasteData.WasteStatus == 1 or WasteData.WasteStartButton == 1%}
-                                <div>Waste Removal Status</div> <span class="valueEl">Ongoing</span>
+                                 {% if WasteData.WasteStatus == 1 %}
+                                    <div>Waste Removal Status</div> <span class="valueEl">Ongoing</span>
                                 {% else %}
-                                <div>Waste Removal Status</div> <span class="valueEl">Completed</span>
-                                {% endif %}
+                                    <div>Waste Removal Status</div> <span class="valueEl">Completed</span>
+                                 {% endif %}
                             </div>
                             <hr>
                             <div>
@@ -181,20 +163,11 @@
                             </div>
                             <hr>
                             <div>
-                            </div>
-                            <hr>
-                            <div>
-                                <div>End time</div><span class="valueEl">{{WasteData.StopWasteDateTime}}</span>
-                            </div>
-                            <hr>
-                            <div>
-                                <div>Next Waste Removal</div><span
-                                    class="valueEl">{{WasteData.NextWasteDateTime}}</span>
+                                <div>Next Waste Removal</div><span class="valueEl">{{WasteData.NextWasteDateTime}}</span>
                             </div>
                             <hr>
                             <div class="sys-info">
-                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}"
-                                        alt=""></span>
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}" alt=""></span>
                             </div>
                         </div>
                     </div>
@@ -202,12 +175,7 @@
                 <div class="water_reservior sec">
                     <div class="thehead">
                         <div class="sys-head">Water Reservoir</div>
-                        {% if WaterData.WaterSystemFault != 0 %}
-                        <div class="start">Error</div>
-                        {% else %}
-                        <button class="start">start</button>
-                        <button class="stop">stop</button>
-                        {% endif %}
+                        <div class="start">start</div>
                         <img src="{% static 'images/setting.svg' %}" alt="settings">
                     </div>
                     <div class="image">
@@ -215,78 +183,35 @@
                     </div>
                     <div class="the-info">
                         <div class="the-amount">
-                            <!---Check this comment for water level bar -->
+                        	<!---Check this comment for water level bar -->
                             <!-- <div class="amount">
                                 <div class="level">Water Level</div>
                                 <span class="percent">75%</span>
                             </div> -->
-
+                            
                         </div>
                         <div class="info">
                             <div>
                                 <div>Water Level</div> <span class="valueEl">High</span>
                             </div>
                             <div>
-                                {% if WaterData.WaterStatus == 1 %}
-                                <div>Pumping water</div> <span class="valueEl">Ongoing</span>
-                                {% else %}
-                                <div>Pumping water</div> <span class="valueEl">Completed</span>
-                                {% endif %}
+                                 {% if WaterData.WaterStatus == 1 %}
+                                    <div>Pumping water</div> <span class="valueEl">Ongoing</span>
+                                 {% else %}
+                                    <div>Pumping water</div> <span class="valueEl">Completed</span>
+                                 {% endif %}
                                 <!--<div>Pumping water</div> <span class="valueEl">{{WaterData.WaterStatus}}</span>-->
                             </div>
                             <hr>
                             <div class="sys-info">
-                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}"
-                                        alt=""></span>
+                                <div>System Information</div><span><img src="{% static 'images/arrow-right.svg' %}" alt=""></span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--</div>-->
-            </form>
+            </div>
         </div>
     </div>
-    <!--<script src="{%static 'scripts/script.js'%}"></script>-->
-    <!--<script src="{%static 'script.js'%}"></script>-->
-    <script>let startFeedingButton = document.getElementById('startFeeding');
-        let stopFeedingButton = document.getElementById('stopFeeding');
-        let startEggButton = document.getElementById('startEgg');
-        let stopEggButton = document.getElementById('stopEgg');
-        let startWasteButton = document.getElementById('startWaste');
-        let stopWasteButton = document.getElementById('stopWaste');
-
-
-
-
-        let Button = document.getElementsByClassName('system-container');
-
-        let feedingProcess = 'stop';
-
-        startFeedingButton.addEventListener('click', function () {
-            startFeedingButton.value = 1
-            console.log("startFeedingButton:", startFeedingButton.value);
-        })
-        stopFeedingButton.addEventListener('click', function () {
-            stopFeedingButton.value = 1
-            console.log("stopFeedingButton:", stopFeedingButton.value);
-        })
-        startEggButton.addEventListener('click', function () {
-            startEggButton.value = 1
-            console.log("startEggButton:", startEggButton.value);
-        })
-        stopEggButton.addEventListener('click', function () {
-            stopEggButton.value = 1;
-            console.log("stopEggButton:", stopEggButton.value);
-        })
-        startWasteButton.addEventListener('click', function () {
-            startWasteButton.value = 1;
-            console.log("startWasteButton:", startWasteButton.value);
-        })
-        stopWasteButton.addEventListener('click', function () {
-            stopWasteButton.value = 1;
-            console.log("stopWasteButton:", stopWasteButton.value);
-        })
-    </script>
 </body>
 
 </html>
